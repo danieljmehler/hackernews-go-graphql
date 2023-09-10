@@ -6,6 +6,8 @@ https://www.howtographql.com/graphql-go/1-getting-started/
 ```shell
 sudo service docker start
 docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=dbpass -e MYSQL_DATABASE=hackernews -d mysql:latest
+mysql -u root -p
+CREATE DATABASE hackernews;
 ```
 
 ## Running migrations
@@ -14,16 +16,16 @@ docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=dbpass -e MYSQL_DATA
 migrate -database mysql://root:dbpass@/hackernews -path internal/pkg/db/migrations/mysql up
 ```
 
+> __NOTE:__ Should not need to run migrations manually, since it's included in `server.go`.
+
 ## Simple query using GraphiQL
 
 ```graphql
 query {
-	links{
+  links {
     title
-    address,
-    user{
-      name
-    }
+    address
+    id
   }
 }
 ```
@@ -31,13 +33,11 @@ query {
 ## Simple mutation using GraphiQL
 
 ```graphql
-mutation {
-  createLink(input: {title: "new link", address:"http://address.org"}){
+mutation create{
+  createLink(input: {title: "something", address: "somewhere"}){
     title,
-    user{
-      name
-    }
-    address
+    address,
+    id,
   }
 }
 ```
