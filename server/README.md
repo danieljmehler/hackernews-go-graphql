@@ -10,6 +10,14 @@ mysql -u root -p
 CREATE DATABASE hackernews;
 ```
 
+## Running the server
+
+```shell
+go run server.go
+```
+
+GraphiQL will become available at `http://localhost:8080`.
+
 ## Running migrations
 
 ```shell
