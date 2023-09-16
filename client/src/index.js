@@ -14,7 +14,7 @@ import {
 
 // 2
 const httpLink = createHttpLink({
-  uri: 'http://localhost:8080'
+  uri: 'http://localhost:8080/query'
 });
 
 // 3
