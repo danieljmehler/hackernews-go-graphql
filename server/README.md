@@ -26,11 +26,32 @@ migrate -database mysql://root:dbpass@/hackernews -path internal/pkg/db/migratio
 
 > __NOTE:__ Should not need to run migrations manually, since it's included in `server.go`.
 
-## Simple query using GraphiQL
+## Create User
 
 ```graphql
-query {
-  links {
+mutation {
+  createUser(input: {username: "user", password: "123"})
+}
+```
+
+Returns JWT token.
+
+## Login User
+
+```
+mutation {
+  login(input:{username:"user", password:"123"})
+}
+```
+
+## Create Link
+
+```
+mutation {
+  createLink(input: { title: "real link!", address: "www.graphql.org" }) {
+    user {
+      name
+    }
     title
     address
     id
@@ -38,14 +59,16 @@ query {
 }
 ```
 
-## Simple mutation using GraphiQL
+Creating links requires the `Authentication` header, with the JWT token as the value.
+
+## Query Links
 
 ```graphql
-mutation create{
-  createLink(input: {title: "something", address: "somewhere"}){
-    title,
-    address,
-    id,
+query {
+  links {
+    title
+    address
+    id
   }
 }
 ```
