@@ -15,26 +15,6 @@ import (
 
 const defaultPort = "8080"
 
-func CorsMiddleware() func(http.Handler) http.Handler {
-	return func(next http.Handler) http.Handler {
-		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			w.Header().Set("Access-Control-Allow-Origin", "*")
-			w.Header().Set("Access-Control-Allow-Methods", "*")
-			w.Header().Set("Access-Control-Allow-Headers", "*")
-			next.ServeHTTP(w, r)
-		})
-	}
-}
-
-// func cors(h http.HandlerFunc) http.HandlerFunc {
-// 	return func(w http.ResponseWriter, r *http.Request) {
-// 		w.Header().Set("Access-Control-Allow-Origin", "*")
-// 		w.Header().Set("Access-Control-Allow-Methods", "*")
-// 		w.Header().Set("Access-Control-Allow-Headers", "*")
-// 		h(w, r)
-// 	}
-// }
-
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -44,7 +24,6 @@ func main() {
 	router := chi.NewRouter()
 
 	router.Use(auth.Middleware())
-	router.Use(CorsMiddleware())
 
 	database.InitDB()
 	defer database.CloseDB()
