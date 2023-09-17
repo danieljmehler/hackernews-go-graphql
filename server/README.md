@@ -1,5 +1,6 @@
 # hackernews-go-graphql
-https://www.howtographql.com/graphql-go/1-getting-started/
+
+([ref](https://www.howtographql.com/graphql-go/1-getting-started/))
 
 ## Starting a MySQL database in WSL2
 
