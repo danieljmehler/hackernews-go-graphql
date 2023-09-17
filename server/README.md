@@ -59,7 +59,7 @@ mutation {
 }
 ```
 
-Creating links requires the `Authentication` header, with the JWT token as the value.
+Creating links requires the `Authorization` header, with the JWT token as the value.
 
 ## Query Links
 
