@@ -10,7 +10,7 @@ const LINKS_QUERY = gql`
       id
     }
   }
-`
+`;
 
 const LinkList = () => {
   const { data } = useQuery(LINKS_QUERY)
